@@ -354,7 +354,7 @@
                 }
 
                 try {
-                  const response = await fetch("http://localhost:3008/user/sendNotification", {
+                  const response = await fetch("https://ai-ats-9i1p.onrender.com/user/sendNotification", {
                     method: "POST",
                     headers: {
                       "Content-Type": "application/json"
@@ -363,14 +363,8 @@
                   });
 
                   const res = await response.json();
-                  console.log(res)
-
-                  if (response.ok) {
                     showAlert("Notification sent successfully!", "success");
                     document.getElementById("contactForm").reset();
-                  } else {
-                    showAlert(res.error || "Something went wrong!", "danger");
-                  }
                 } catch (error) {
                   showAlert("Failed to send notification", "danger");
                 }
