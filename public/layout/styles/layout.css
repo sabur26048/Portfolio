@@ -264,6 +264,13 @@ td{border-width:0 1px;}
 .faicon-linkedin:hover{background-color:#0E76A8;}
 .faicon-twitter:hover{background-color:#00ACEE;}
 .faicon-vk:hover{background-color:#4E658E;}
+/* Example CSS for custom icons */
+
+  
+  .faicon-github:hover { background-color: #6e5494; } /* GitHub color */
+  .faicon-leetcode:hover { background-color: #f89f1b; } /* LeetCode color */
+  .faicon-geeksforgeeks:hover { background-color: #0f9d58; } /* GeeksforGeeks color */
+  
 
 
 /* ------------------------------------------------------------------------------------------------------------ */

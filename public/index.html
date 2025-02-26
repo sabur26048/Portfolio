@@ -39,7 +39,7 @@
       </div>
     </div>
   </div> -->
-    <div class="wrapper bgded overlay "  style="background-image:url('images/demo/backgrounds/01.png');">
+    <div class="wrapper bgded overlay " style="background-image:url('images/demo/backgrounds/01.png');">
       <div id="pageintro" class="hoc clear">
         <div class="wrapper row1" style="margin: 1rem;">
           <nav id="mainav" class="fl_left" style="text-align: center; margin-top: 0rem;">
@@ -86,9 +86,9 @@
         </div>
         <article>
           <h3 class="heading" style="margin-top: 4rem; margin-bottom: 0%;">Hey! Sabur this side</h3>
-          <h6 style="letter-spacing: 20px; margin-bottom: 1rem; font-style: italic;">C  O  D  E  R</h6>
+          <h6 style="letter-spacing: 20px; margin-bottom: 1rem; font-style: italic;">C O D E R</h6>
           <p>Software Developer | Full-Stack & Distributed Systems Engineer (4+ Years Experience)</p>
-          <p width="100%" >
+          <p width="100%">
             Passionate and results-driven software developer, experience in backend and frontend
             development,
             specializing in building scalable, distributed systems. Proficient in Java, Spring Boot, Node.js, React, and
@@ -113,7 +113,7 @@
               <li><a class="btn" href="#">WEATHER DASHBOARD</a></li>
             </ul>
           </footer>
-          
+
         </article>
       </div>
     </div>
@@ -260,12 +260,11 @@
               <li><i class="fa fa-envelope-o"></i>saburali26048@gmail.com</li>
             </ul>
             <ul class="faico clear">
-              <li><a class="faicon-facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-              <li><a class="faicon-twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-              <li><a class="faicon-dribble" href="#"><i class="fa fa-dribbble"></i></a></li>
-              <li><a class="faicon-linkedin" href="https://www.linkedin.com/in/sk-sabur-ali-380b21184/"><i
-                    class="fa fa-linkedin"></i></a></li>
-            </ul>
+              <li><a class="faicon-linkedin" href="https://www.linkedin.com/in/sk-sabur-ali-380b21184/"><i class="fa fa-linkedin"></i></a></li>
+              <li><a class="faicon-github" href="https://github.com/sabur26048?tab=repositories" target="_blank"><i class="fa fa-github"></i></a></li>
+              <li><a class="faicon-leetcode" href="https://leetcode.com/u/saburali26048/" target="_blank"><i class="fa fa-code"></i></a></li>
+              <li><a class="faicon-geeksforgeeks" href="https://www.geeksforgeeks.org/user/deadpool123/" target="_blank"><i class="fa fa-graduation-cap"></i></a></li>
+            </ul>            
           </div>
           <div class="one_quarter">
             <h6 class="heading">Company</h6>
@@ -279,8 +278,10 @@
           <div class="one_quarter">
             <h6 class="heading">Project to campany</h6>
             <ul class="nospace linklist">
-              <li><a href="https://www.besimplified.com/checkout/" target="_blank">SIMPLIFIED CHECKOUT</a><span
-                  style="padding-left: 3px; padding-bottom: 2px;">Details</span></li>
+              <li><a href="https://www.besimplified.com/checkout/" target="_blank">SIMPLIFIED CHECKOUT</a>
+                <span style="padding-left: 3px; padding-bottom: 2px;">
+                  <a href="https://sksaburali.netlify.app/details.html" target="_self">Details</a>
+                </span></li>
               <li><a href="https://dbi360.com/zyler" target="_blank">ZYLER MFG</a><span
                   style="padding-left: 3px; padding-bottom: 2px;">Details</span></li>
               <li><a href="https://www.arcfacilities.com/" target="_blank">ARC FACILITY</a><span
@@ -291,16 +292,85 @@
           </div>
           <div class="one_quarter">
             <h6 class="heading">Connect wih me</h6>
-            <p class="nospace btmspace-15">Fill below details and submit
+            <p class="nospace btmspace-15">Fill the below details and submit
             </p>
-            <form method="post" action="#">
+            <form id="contactForm">
               <fieldset>
-                <input class="btmspace-15" type="text" value="" placeholder="Name">
-                <input class="btmspace-15" type="number" value="" placeholder="Mobile">
-                <input class="btmspace-15" type="email" value="" placeholder="Email">
-                <button type="submit" value="submit">Submit</button>
+                <input class="btmspace-15" type="text" id="name" placeholder="Name">
+                <input class="btmspace-15" type="test" id="mobile" placeholder="Mobile">
+                <input class="btmspace-15" type="email" id="email" placeholder="Email">
+                <button type="submit">Submit</button>
               </fieldset>
             </form>
+
+            <div id="alertBox" class="alert" style="display: none;"></div>
+
+            <script>
+              document.getElementById("contactForm").addEventListener("submit", async function (event) {
+                event.preventDefault(); // Prevent default form submission
+
+                const name = document.getElementById("name").value.trim();
+                const mobile = document.getElementById("mobile").value.trim();
+                const email = document.getElementById("email").value.trim();
+                const alertBox = document.getElementById("alertBox");
+
+                // Regular expressions for validation
+                const nameRegex = /^[A-Za-z\s]+$/; // Only letters and spaces
+                const mobileRegex = /^[6-9]\d{9}$/; // Indian mobile number format
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Standard email validation
+
+                if (!name || !mobile || !email) {
+                  showAlert("All fields are required!", "danger");
+                  return;
+                }
+
+                if (!nameRegex.test(name)) {
+                  showAlert("Name should contain only letters and spaces!", "danger");
+                  return;
+                }
+
+                if (!mobileRegex.test(mobile)) {
+                  showAlert("Enter a valid 10-digit mobile number!", "danger");
+                  return;
+                }
+
+                if (!emailRegex.test(email)) {
+                  showAlert("Enter a valid email address!", "danger");
+                  return;
+                }
+
+                try {
+                  const response = await fetch("http://localhost:3008/user/sendNotification", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ name, mobile, email }),
+                  });
+
+                  const res = await response.json();
+                  console.log(res)
+
+                  if (response.ok) {
+                    showAlert("Notification sent successfully!", "success");
+                    document.getElementById("contactForm").reset();
+                  } else {
+                    showAlert(res.error || "Something went wrong!", "danger");
+                  }
+                } catch (error) {
+                  showAlert("Failed to send notification", "danger");
+                }
+              });
+
+              function showAlert(message, type) {
+                const alertBox = document.getElementById("alertBox");
+               if(type == "danger")
+                alertBox.style.color ="red"
+                alertBox.innerText = message;
+                alertBox.style.display = "block";
+                setTimeout(() => alertBox.style.display = "none", 3000); // Hide after 3s
+              }
+            </script>
+
+
           </div>
         </footer>
       </div>
