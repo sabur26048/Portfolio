@@ -354,7 +354,7 @@
                 }
 
                 try {
-                  const response = await fetch("http://localhost:3008/user/sendNotification", {
+                  const response = await fetch("http://ai-ats-9i1p.onrender.com/user/sendNotification", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ name, mobile, email }),

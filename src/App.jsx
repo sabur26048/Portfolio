@@ -60,7 +60,7 @@ function App() {
     formData.append("jobDescription", jobDescription);
 
     try {
-      const response = await fetch("https://ai-ats-9i1p.onrender.com/getAtsScore", {
+      const response = await fetch("https://ai-ats-9i1p.onrender.com/AI-ATS/getAtsScore", {
         method: "POST",
         body: formData
       });
