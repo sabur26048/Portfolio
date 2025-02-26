@@ -60,7 +60,7 @@ function App() {
     formData.append("jobDescription", jobDescription);
 
     try {
-      const response = await fetch("https://ai-ats-9i1p.onrender.com/AI-ATS/getAtsScore", {
+      const response = await fetch("http://localhost:3008/AI-ATS/getAtsScore", {
         method: "POST",
         body: formData
       });
@@ -84,7 +84,7 @@ function App() {
   }
   const fetchSuggestion = async (formData, result) => {
     const score = Number(result.score.split("/")[0]);
-    let res = await fetch(`https://ai-ats-9i1p.onrender.com/suggestion/${score}`, {
+    let res = await fetch(`https://ai-ats-9i1p.onrender.com/AI-ATS/suggestion/${score}`, {
       method: "POST",
       body: formData
     });
